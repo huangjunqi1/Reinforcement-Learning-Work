@@ -1,0 +1,53 @@
+Game reset.
+Board: 
+        _       _       _
+        _       _       _
+        _       _       _
+Next turn: X
+
+Action (2,2) taken.
+Board: 
+        _       _       _
+        _       _       _
+        _       _       X
+Next turn: O
+
+Winner not found.
+
+Action (0,0) taken.
+Board: 
+        O       _       _
+        _       _       _
+        _       _       X
+Next turn: X
+
+Winner not found.
+
+Action (2,1) taken.
+Board: 
+        O       _       _
+        _       _       _
+        _       X       X
+Next turn: O
+
+Winner not found.
+
+Action (0,1) taken.
+Board:
+        O       O       _
+        _       _       _
+        _       X       X
+Next turn: X
+
+Winner not found.
+
+Action (2,0) taken.
+Board:
+        O       O       _
+        _       _       _
+        X       X       X
+Next turn: O
+
+Winner: X
+
+Winner: X
