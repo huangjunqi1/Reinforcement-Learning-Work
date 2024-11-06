@@ -146,7 +146,7 @@ class MazePolicyDynaQ : public MazePolicyBase{
             delete [] visit;
         }
 
-        void learn(int iter=3000, int verbose_freq=10, int n=5){
+        void learn(int iter=6000, int verbose_freq=1, int n=5){
             bool done;
             int action, next_action;
             double reward;
@@ -157,7 +157,7 @@ class MazePolicyDynaQ : public MazePolicyBase{
             double cumulative_reward = 0;
 
             for (int i = 0; i < iter; ++ i){
-                if (i==1000)
+                if (i==3000)
                     env.maze_shortcut(8,3);  
                 state = env.reset();
                 done = false;
@@ -194,7 +194,7 @@ class MazePolicyDynaQ : public MazePolicyBase{
                 auto action = (*this)(state);
                 cumulative_reward += q[locate(state,action)]/episode_step;
                 if (i % verbose_freq == 0){
-                    cout << i <<" episode_step: " << episode_step << endl;
+                    cout << i <<" " << cumulative_reward << " "<< episode_step<<endl;
                 }
             }
         }
@@ -277,7 +277,7 @@ class MazePolicyDynaQplus : public MazePolicyBase{
             delete [] tm;
         }
 
-        void learn(int iter=3000, int verbose_freq=10, int n=5,double k=0.005){
+        void learn(int iter=6000, int verbose_freq=1, int n=5,double k=0.002){
             bool done;
             int action, next_action;
             double reward;
@@ -288,8 +288,8 @@ class MazePolicyDynaQplus : public MazePolicyBase{
             double cumulative_reward = 0;
 
             for (int i = 0; i < iter; ++ i){
-                if (i==1000)
-                    env.maze_shortcut(8,3);  
+                if (i==3000)
+                    env.maze_shortcut(8,3); 
                 state = env.reset();
                 done = false;
                 episode_step = 0;
@@ -327,7 +327,7 @@ class MazePolicyDynaQplus : public MazePolicyBase{
                 auto action = (*this)(state);
                 cumulative_reward += q[locate(state,action)]/episode_step;
                 if (i % verbose_freq == 0){
-                    cout << i <<" episode_step: " << episode_step << endl;
+                    cout << i <<" " << cumulative_reward << " "<< episode_step<<endl;
                 }
             }
         }
@@ -375,6 +375,7 @@ class MazePolicyDynaQplus : public MazePolicyBase{
 
 
 int main(){
+    freopen("DynaQplusShortcut.out","w",stdout);
     const int max_x = 9, max_y = 6;
     const int start_x = 3, start_y = 5;
     const int target_x = 8, target_y = 0;
@@ -388,7 +389,7 @@ int main(){
     };
     MazeEnv env(maze, max_x, max_y, start_x, start_y, target_x, target_y);
     env.reset();
-    MazePolicyDynaQ policy(env);
+    MazePolicyDynaQplus policy(env);
     policy.learn();
     policy.print_policy();
     return 0;
